@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+body{
+    background-color: #a88a6d4a;
+}
+@theme {
+  --color-primary: #7a5e3b;
+  --color-secondary:#a88a6d4a;
+}
+
+::-webkit-scrollbar{
+  @apply hidden
+}

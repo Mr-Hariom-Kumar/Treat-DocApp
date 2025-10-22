@@ -8,6 +8,7 @@ const AdminContextProvider=(props)=>{
     const [atoken,setAtoken]=useState(localStorage.getItem('atoken')?localStorage.getItem('atoken'):'')
     const [loading, setLoading] = useState(false) 
     const [doctors,setDoctors]=useState([])
+    const [appointments,setAppointments]=useState([])
     
     const backendURL=import.meta.env.VITE_BACKEND_URL
 
@@ -40,12 +41,27 @@ const AdminContextProvider=(props)=>{
             toast.error(error.message)
         }
     }
+
+    const getAllAppointments=async ()=>{
+        try{
+            const {data}=await axios.get(backendURL+'/api/admin/appointments',{headers:{atoken}})
+            if(data.success){
+                setAppointments(data.appointments)
+                console.log(data.appointments)
+            }else{
+                toast.error(error.message)
+            }
+        }catch(error){
+            console.log(error)
+        }
+    }
+
     const value={
         atoken,setAtoken,
         backendURL,
         loading,setLoading,
         doctors,setDoctors,
-        getAllDoctors,changeAvailability,
+        getAllDoctors,changeAvailability,getAllAppointments,appointments
     }
     return (
         <AdminContext.Provider value={value}>

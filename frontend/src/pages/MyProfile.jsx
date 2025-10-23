@@ -3,7 +3,7 @@ import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Spiner from '../../../admin/src/components/Spiner'
+import Spiner from '../components/Spiner'
 
 const MyProfile = () => {
 

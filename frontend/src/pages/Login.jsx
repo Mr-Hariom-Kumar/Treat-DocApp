@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import axios from 'axios'
-import Spiner from "../../../admin/src/components/Spiner";
+import Spiner from '../components/Spiner'
 import { useNavigate } from "react-router-dom";
 
 

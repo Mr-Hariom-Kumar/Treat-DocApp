@@ -2,6 +2,7 @@ import React from 'react'
 import { useContext } from 'react'
 import { AdminContext } from '../../context/AdminContext'
 import { useEffect } from 'react'
+import './DoctorList.css'
 
 const DoctorsList = () => {
 
@@ -13,12 +14,12 @@ const DoctorsList = () => {
     }
   },[atoken])
   return (
-    <div className='m-5 max-h-[90] overflow-y-scroll'>
+    <div className='flex-1 container m-5 overflow-x-hidden md:overflow-x-scroll max-h-[90]  md:ml-[40vh] mt-[50px] overflow-y-scroll max-sm:flex  max-sm:flex-col max-sm:flex-1'>
       <h1 className='text-lg font-medium'>All Doctors</h1>
-      <div className='w-full flex flex-wrap gap-4 pt-5 gap-y-6'>
+      <div className='w-full flex  flex-wrap flex-1 gap-4 pt-5 gap-y-6   ml-[70px] '>
           {
             doctors.map((item,index)=>(
-              <div className='border border-indigo-200 rounded-xl max-w-56 overflow-hidden cursor-pointer group bg-white shadow-2xl' key={index}>
+              <div className='border border-indigo-200 rounded-xl max-w-56 min-w-56 overflow-hidden cursor-pointer group bg-white shadow-2xl ' key={index}>
                 <img className='group hover:bg-primary transition-all duration-500' src={item.image} alt="" />
                 <div className='p-4'>
                   <p className='text-neutral-800 text-lg font-medium'>{item.name}</p>

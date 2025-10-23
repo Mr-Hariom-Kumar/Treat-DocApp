@@ -9,6 +9,7 @@ const AdminContextProvider=(props)=>{
     const [loading, setLoading] = useState(false) 
     const [doctors,setDoctors]=useState([])
     const [appointments,setAppointments]=useState([])
+    const [dashData,setDashData]=useState(false)
     
     const backendURL=import.meta.env.VITE_BACKEND_URL
 
@@ -56,12 +57,43 @@ const AdminContextProvider=(props)=>{
         }
     }
 
+    const cancelAppointments=async (appointmentId)=>{
+        try{
+            const {data}=await axios.post(backendURL+'/api/admin/cancel-appointments',{appointmentId},{headers:{atoken}})
+            if(data.success){
+                toast.success(data.message)
+                getAllAppointments()
+            }else{
+                toast.error(data.error)
+                //console.log(data)
+            }
+        }catch(error){
+            toast.error(error.message)
+            console.log("error is at catch  block frontend part ",error)
+        }
+    }
+
+    const getDashData=async ()=>{
+        try{
+            const {data}=await axios.get(backendURL+'/api/admin/dashboard',{headers:{atoken}})
+            if(data.success){
+                setDashData(data.dashData)
+                console.log(data.dashData)
+            }else{
+                toast.error(data.message)
+            }
+        }catch(error){
+             toast.error(error.message)
+            console.log("error is at catch  block frontend part ",error)
+        }
+    }
     const value={
         atoken,setAtoken,
         backendURL,
         loading,setLoading,
         doctors,setDoctors,
-        getAllDoctors,changeAvailability,getAllAppointments,appointments
+        getAllDoctors,changeAvailability,getAllAppointments,appointments,cancelAppointments,
+        dashData,getDashData
     }
     return (
         <AdminContext.Provider value={value}>

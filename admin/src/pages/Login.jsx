@@ -3,6 +3,7 @@ import { assets } from '../assets/assets'
 import { AdminContext } from '../context/AdminContext'
 import axios from 'axios'
 import { toast } from 'react-toastify';
+import { AppContext } from '../context/AppContext';
 
 
 const Login = () => {
@@ -10,6 +11,7 @@ const Login = () => {
     const [email,setEmail]=useState('')
     const [password ,setPassword]=useState('')
     const {setAtoken, backendURL}=useContext(AdminContext)
+    const {patientLoginURL}=useContext(AppContext)
 
     const onSubmitHandler=async (event)=>{
        event.preventDefault()
@@ -37,20 +39,25 @@ const Login = () => {
   return (
     <form onSubmit={onSubmitHandler} className='min-h-[80vh] flex items-center'>
         <div className='flex flex-col gap-3  m-auto items-start p-8 min-w-[340px] sm:min-w-96 border border-zinc-300 rounded-xl text-sm shadow-2xl'>
+            <div className="flex justify-center items-center w-full">
+                <div className="px-12 py-3 bg-gray-300 hover:bg-primary cursor-pointer hover:text-white font-medium rounded-tl-lg rounded-bl-lg">Admin</div>
+                <a href={patientLoginURL}><div className="px-12 py-3 bg-gray-300 hover:bg-primary cursor-pointer hover:text-white font-medium  rounded-tr-lg rounded-br-lg">Patient</div></a>        
+            </div>
+
             <p className='text-2xl font-semibold m-auto'><span className='text-primary'>{state}</span>  Login</p>
             <div className='w-full'>
                 <p>Email</p>
-                <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" required className='border-zinc-700 rounded w-full p-2 mt-2 border-[1px]'  />
+                <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" required className='border-zinc-700 rounded w-full p-2 mt-2 border-[1px] ' placeholder=' Type-> Admin@Treat.com'  />
             </div>
             <div className='w-full'>
                 <p>password</p>
-                <input onChange={(e)=>setPassword(e.target.value)} value={password} type="Password" className='border-zinc-700 rounded w-full p-2 mt-2 border-[1px]'  required/>
+                <input onChange={(e)=>setPassword(e.target.value)} value={password} type="Password" className='border-zinc-700 rounded w-full p-2 mt-2 border-[1px]' placeholder='Type-> qwerty123'  required/>
             </div>
             <button className='bg-primary w-full text-white py-2 mt-3 rounded-md text-base cursor-pointer'>Login</button>
-            {
+            {/* {
                 state==='Admin'?<p>Doctor?<span className='text-blue-700 cursor-pointer underline' onClick={()=>setState('Doctor')}>Click here</span></p>
                 :<p> Admin Login?<span className='text-blue-700 cursor-pointer underline' onClick={()=>setState('Admin')}>Click here</span></p>
-            }
+            } */}
         </div>
     </form>
   )

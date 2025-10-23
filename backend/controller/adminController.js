@@ -5,6 +5,7 @@ import doctorModel from '../model/doctorModel.js'
 import connectCloudinary from '../config/cloudinary.js'
 import jwt from 'jsonwebtoken'
 import appointmentModel from '../model/appointmentModel.js'
+import userModel from '../model/userModel.js'
 const addDoctor=async (req,res)=>{
     try{
         const {name,email,password,speciality,degree,experience,about,fees,address}=req.body
@@ -100,4 +101,50 @@ const appointmentAdmin=async(req,res)=>{
     }
 }
 
-export {addDoctor,loginAdmin,allDoctors,appointmentAdmin}
+//api for admin appointment cancellation
+const cancelAdminAppointment=async (req,res)=>{
+    try{
+        const {appointmentId}=req.body
+        const appointmentData=await appointmentModel.findById(appointmentId)
+
+        
+
+        await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
+
+        //releasing data 
+        const {docId,slotTime,slotDate}=appointmentData
+        const doctorData=await doctorModel.findById(docId)
+        let slot_booked=doctorData.slot_booked
+        slot_booked[slotDate]=slot_booked[slotDate].filter(e=>e!=slotTime)
+
+        await doctorModel.findByIdAndUpdate(docId,{slot_booked})
+
+        res.json({success:true,message:"Appointment cancelled"})
+
+    }catch(error){
+        res.json({success:false,message:error.message})
+        console.log(error)
+    }
+}
+
+
+const adminDashboard=async (req,res)=>{
+    try{
+        const doctors =await doctorModel.find({})
+        const users=await userModel.find({})
+        const appointments=await appointmentModel.find({})
+
+        const dashData={
+            doctors:doctors.length,
+            appointments:appointments.length,
+            patients:users.length,
+            latestAppointments:appointments.reverse().slice(0,5)
+        }
+
+        res.json({success:true,dashData})
+    }catch(error){
+         res.json({success:false,message:error.message})
+        console.log(error)
+    }
+}
+export {addDoctor,loginAdmin,allDoctors,appointmentAdmin,cancelAdminAppointment,adminDashboard}

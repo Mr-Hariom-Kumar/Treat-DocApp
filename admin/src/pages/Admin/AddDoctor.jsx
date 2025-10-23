@@ -78,7 +78,7 @@ const AddDoctor = () => {
     <>
       {loading && (<Spiner/>)}
 
-      <form onSubmit={onSubmitHandler} className="m-5 w-full ">
+      <form onSubmit={onSubmitHandler} className="m-5 w-full z-[-10] fixed max-sm:pr-[-20px] p-5 px-15 max-md:pl-[-10px]  md:ml-[20vw] sm:ml-[30vw] md:mt-[70px] mt-16  ">
         <p className="mb-3 text-lg font-medium">Add Doctor</p>
         <div className="bg-white px-8 py-8  rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll shadow-2xl relative">
           <div className="flex items-center gap-4 " >

@@ -1,0 +1,29 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+@import "tailwindcss";
+
+body{
+    background-color: #a88a6d4a;
+}
+
+@theme {
+  --color-primary: #7a5e3b;
+  --color-secondary:#a88a6d4a;
+}
+.active hr{
+    @apply block
+}
+::-webkit-scrollbar{
+    display: none;
+}
+
+@media(max-width:740px){
+    .active p{
+        @apply text-white bg-primary
+    }
+}
+
+*{
+    font-family: outfit;
+}

@@ -76,7 +76,7 @@ const AppContextProvider=(props)=>{
     },[token])
 
     const value={
-        doctors,getDoctorsData,
+        doctors,
         currencySymbol,getDoctorsData,token,setToken,backendURL,loading,setLoading,
         userData,setUserData,loadUserProfileData,adminLoginURL
     }

@@ -4,7 +4,7 @@ export const AppContext=createContext()
 
 const AppContextProvider=(props)=>{
     const currency='$'
-    const patientLoginURL='https://treat-doc-app.vercel.app/login'
+    const patientLoginURL='https://treat-doc-app.vercel.app'
     const calculateAge=(dob)=>{
         const today=new Date()
         const birthDate=new Date(dob)

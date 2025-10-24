@@ -1,7 +1,7 @@
-import expresss from  'express'
+import express from  'express'
 import { doctorList } from '../controller/doctorController.js'
 
-const doctorRouter=expresss.Router()
+const doctorRouter=express.Router()
 doctorRouter.get('/list',doctorList)
 
 export default doctorRouter

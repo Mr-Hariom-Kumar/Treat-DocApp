@@ -15,19 +15,13 @@ const port =process.env.PORT ||4000
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors(
-    {
-    origin: [
-        'http://localhost:5173',
-        'http://localhost:5174',
-        'https://treat-doc-app.vercel.app',  // Your actual frontend URL
-        'https://treat-doc-app-frontend-70eqyefsy-mr-hariom-kumars-projects.vercel.app'
-    ],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'token', 'atoken']
-}
-))
+app.use(cors({
+  origin: '*', // allow all domains
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'], // required for JWT header
+}));
+app.options('*', cors());
+
 
 connectDB()
 connectCloudinary()

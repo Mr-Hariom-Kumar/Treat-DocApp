@@ -6,8 +6,8 @@ const Navbar = () => {
 
     const navigate=useNavigate()
     const [showMenu,setShowMenu]=useState(false)
-    const [token, setToken] = useState(localStorage.getItem("token") || "")
-    const {userData} =useContext(AppContext)
+    
+    const {userData,token,setToken} =useContext(AppContext)
 
 
     const logout=async (req,res)=>{

@@ -1,6 +1,6 @@
 
-import React,{useState} from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React,{useContext, useState} from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Doctor from './pages/Doctor'
 import MyProfile from './pages/MyProfile'
@@ -13,10 +13,11 @@ import Contact from './pages/Contact'
 import Footer from './components/Footer'
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { AppContext } from './context/AppContext'
 
 const App = () => {
 
-  const [token,setToken]=useState(localStorage.getItem("token")?localStorage.getItem("token"):"")
+  const {token,setToken}=useContext(AppContext)
   const navigate=useNavigate()
   return (
     <div className='mx-4 sm:mx-[10%]'>
@@ -26,12 +27,10 @@ const App = () => {
           <Route path='/' element={<Home />}/>
           <Route path='/doctors' element={<Doctor />}/>
           <Route path='/doctors/:speciality' element={<Doctor />}/>
-          {
-            token?
-              <Route path='/login' element={<navigate to='/' />}/>
-            :
-              <Route path='/login' element={<Login />}/>
-          }
+           <Route 
+          path='/login' 
+          element={token ? <Navigate to='/' replace /> : <Login />} 
+        />
           <Route path='/about' element={<About />}/>
           <Route path='/contact' element={<Contact />}/>
           <Route path='/my-profile' element={<MyProfile />}/>

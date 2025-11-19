@@ -27,7 +27,7 @@ const App = () => {
           <Route path='/' element={<Home />}/>
           <Route path='/doctors' element={<Doctor />}/>
           <Route path='/doctors/:speciality' element={<Doctor />}/>
-           <Route 
+          <Route 
           path='/login' 
           element={token ? <Navigate to='/' replace /> : <Login />} 
         />

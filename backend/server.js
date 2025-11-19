@@ -11,13 +11,12 @@ const app = express()
 const port = process.env.PORT || 4000
 
 // ---- CORS: allow all origins + handle preflight globally ----
-const corsOptions = {
+
+app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}
-app.use(cors(corsOptions))
-app.options('*', cors(corsOptions))
+  credentials: true
+}))
+
 
 // Fallback to ensure headers are present even on errors/early exits
 app.use((req, res, next) => {

@@ -15,7 +15,7 @@ const AppContextProvider=(props)=>{
     const [token,setToken]=useState(localStorage.getItem('token')?localStorage.getItem('token'):'')
     const [loading, setLoading] = useState(false) 
     const [userData,setUserData] = useState(false)
-    const adminLoginURL='http://localhost:5174/'
+    const adminLoginURL='https://treat-doc-app-ykcf.vercel.app/'
 
     const getDoctorsData=async (req,res)=>{
         try{
